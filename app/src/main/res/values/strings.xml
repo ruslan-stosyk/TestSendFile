@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">TestApplication</string>
     <string name="action_ok">OK</string>
+    <string name="action_select_file">Select file</string>
+    <string name="action_upload_file">Upload file</string>
+    <string name="upload_file_permission_denied">Permission denied</string>
 </resources>

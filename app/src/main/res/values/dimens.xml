@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Base-->
+    <dimen name="tiny">2dp</dimen>
+    <dimen name="small">4dp</dimen>
+    <dimen name="medium">8dp</dimen>
+    <dimen name="big">16dp</dimen>
+    <dimen name="large">24dp</dimen>
+    <dimen name="big_x2">32dp</dimen>
+    <dimen name="big_x3">48dp</dimen>
+    <dimen name="big_x4">64dp</dimen>
+    <dimen name="big_x5">80dp</dimen>
+    <dimen name="big_x6">96dp</dimen>
+    <dimen name="big_x7">112dp</dimen>
+    <dimen name="big_x8">128dp</dimen>
+</resources>

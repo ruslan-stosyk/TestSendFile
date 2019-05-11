@@ -16,7 +16,8 @@ abstract class BaseActivityContract {
 
         fun onViewDestroyed()
 
-        fun release()
+         fun isViewAttached(): Boolean
+
     }
 
     interface BaseViews {
@@ -24,5 +25,8 @@ abstract class BaseActivityContract {
         fun showLoading()
 
         fun hideLoading()
+
+        fun showSnackBar(message: String)
+
     }
 }

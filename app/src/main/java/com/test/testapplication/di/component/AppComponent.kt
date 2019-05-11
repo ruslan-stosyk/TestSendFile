@@ -1,10 +1,7 @@
 package com.test.testapplication.di.component
 
 import com.test.testapplication.App
-import com.test.testapplication.di.module.AppModule
-import com.test.testapplication.di.module.InteractorModule
-import com.test.testapplication.di.module.NetModule
-import com.test.testapplication.di.module.UseCaseModule
+import com.test.testapplication.di.module.*
 import dagger.Component
 import javax.inject.Singleton
 
@@ -19,4 +16,7 @@ import javax.inject.Singleton
 @Component(modules = [AppModule::class, UseCaseModule::class, InteractorModule::class, NetModule::class])
 interface AppComponent {
     fun inject(app: App)
+
+    fun uploadFileActivityComponent(activityModule: UploadFileActivityModule): UploadFileActivityComponent
+
 }

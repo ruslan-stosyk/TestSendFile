@@ -15,19 +15,24 @@ abstract class BaseActivityPresenter<V : BaseActivityContract.BaseViews>(context
     protected val TAG = this.javaClass.simpleName
 
     protected var mAppContext: Context = context
-    protected lateinit var mView: V
+    protected var mView: V? = null
 
     override fun <View : BaseActivityContract.BaseViews> onViewAttached(view: View) {
-        Log.d(TAG, "onViewAttached ----> Was Attached")
         mView = view as V
+        Log.d(TAG, "onViewAttached ----> Was Attached")
     }
 
     override fun onViewDetached() {
+        mView = null
         Log.d(TAG, "onViewDetached -----> view was detached")
     }
 
     override fun onViewDestroyed() {
+        mView = null
         Log.d(TAG, "onViewDestroyed ----> view was destroyed")
-        release()
+    }
+
+    override fun isViewAttached(): Boolean {
+        return mView != null
     }
 }

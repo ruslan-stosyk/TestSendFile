@@ -3,8 +3,10 @@ package com.test.testapplication
 import android.app.Application
 import com.test.testapplication.di.component.AppComponent
 import com.test.testapplication.di.component.DaggerAppComponent
+import com.test.testapplication.di.component.UploadFileActivityComponent
 import com.test.testapplication.di.module.AppModule
 import com.test.testapplication.di.module.NetModule
+import com.test.testapplication.di.module.UploadFileActivityModule
 
 
 /**
@@ -16,6 +18,7 @@ import com.test.testapplication.di.module.NetModule
 class App : Application() {
 
     val BASE_URL = "http://localhost:3333"
+    private var mUploadFileActivityComponent: UploadFileActivityComponent? = null
 
     private val mAppComponent: AppComponent by lazy {
         DaggerAppComponent
@@ -28,5 +31,16 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         mAppComponent.inject(this)
+    }
+
+    fun getUploadFileComponent(): UploadFileActivityComponent {
+        if (mUploadFileActivityComponent == null) {
+            mUploadFileActivityComponent = mAppComponent.uploadFileActivityComponent(UploadFileActivityModule())
+        }
+        return mUploadFileActivityComponent!!
+    }
+
+    fun releaseSplashActivityComponent() {
+        mUploadFileActivityComponent = null
     }
 }
