@@ -11,8 +11,8 @@ import com.test.testapplication.base.BaseActivityContract
  * Time: 9:35
  */
 
-class UploadFileActivityContract : BaseActivityContract() {
-    interface Action : BaseActions {
+class SunActivityContract : BaseActivityContract() {
+    interface Actions : BaseActions {
 
         fun checkPermissionReadWriteStorage()
 

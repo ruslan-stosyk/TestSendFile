@@ -6,17 +6,15 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.test.testapplication.BuildConfig
-import com.test.testapplication.data.service.api.FileApiService
+import com.test.testapplication.data.service.RestApiService
 import dagger.Module
 import dagger.Provides
 import okhttp3.Cache
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
-import javax.inject.Named
 import javax.inject.Singleton
 
 
@@ -32,10 +30,10 @@ class NetModule(private val mBaseUrl: String) {
 
     @Provides
     @Singleton
-    internal fun provideFileHttpLoggingInterceptor(): HttpLoggingInterceptor {
+    internal fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
         val interceptor = HttpLoggingInterceptor()
         // set your desired log level
-        interceptor.level = HttpLoggingInterceptor.Level.HEADERS
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
         return interceptor
     }
 
@@ -56,16 +54,14 @@ class NetModule(private val mBaseUrl: String) {
 
     @Provides
     @Singleton
-    internal fun provideFileOkHttpClient(
-        loggingInterceptor: HttpLoggingInterceptor, interceptor: Interceptor, cache: Cache
-    ): OkHttpClient {
+    internal fun provideOkHttpClient(loggingInterceptor: HttpLoggingInterceptor,
+                                     cache: Cache): OkHttpClient {
 
-        val builder = OkHttpClient.Builder()
+        val builder: OkHttpClient.Builder = OkHttpClient.Builder()
             .followRedirects(true)
             .followSslRedirects(true)
-            .readTimeout(15, TimeUnit.SECONDS)
-            .writeTimeout(15, TimeUnit.SECONDS)
-            .addNetworkInterceptor(interceptor)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .connectTimeout(30, TimeUnit.SECONDS)
             .cache(cache)
 
         if (BuildConfig.DEBUG) {
@@ -76,7 +72,7 @@ class NetModule(private val mBaseUrl: String) {
 
     @Provides
     @Singleton
-    internal fun provideFileRetrofit(gson: Gson, okHttpClient: OkHttpClient): Retrofit {
+    internal fun provideRetrofit(gson: Gson, okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -87,8 +83,8 @@ class NetModule(private val mBaseUrl: String) {
 
     @Provides
     @Singleton
-    internal fun provideFileApiService(retrofit: Retrofit): FileApiService {
-
-        return retrofit.create(FileApiService::class.java)
+    internal fun provideRestApiService(retrofit: Retrofit): RestApiService {
+        return retrofit.create(RestApiService::class.java)
     }
+
 }

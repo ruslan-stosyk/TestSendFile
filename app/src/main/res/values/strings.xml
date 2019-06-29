@@ -4,4 +4,6 @@
     <string name="action_select_file">Select file</string>
     <string name="action_upload_file">Upload file</string>
     <string name="upload_file_permission_denied">Permission denied</string>
+    <string name="error_airplane_mode">Airplane mode</string>
+    <string name="error_internet_connection">No internet connection</string>
 </resources>

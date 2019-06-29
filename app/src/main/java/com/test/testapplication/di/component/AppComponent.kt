@@ -15,8 +15,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [AppModule::class, UseCaseModule::class, InteractorModule::class, NetModule::class])
 interface AppComponent {
-    fun inject(app: App)
+    fun addSplashActivityComponent(activityModule: SplashActivityModule): SplashActivityComponent
 
-    fun uploadFileActivityComponent(activityModule: UploadFileActivityModule): UploadFileActivityComponent
-
+    fun addSunActivityComponent(activityModule: SunActivityModule): SunActivityComponent
 }

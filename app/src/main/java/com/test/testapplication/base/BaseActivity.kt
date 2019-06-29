@@ -15,6 +15,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import com.test.testapplication.R
+import com.test.testapplication.base.BaseActivityContract.*
 import kotlinx.android.synthetic.main.activity_base.*
 import javax.inject.Inject
 
@@ -25,9 +26,7 @@ import javax.inject.Inject
  * Time: 00:56
  */
 
-abstract class BaseActivity<T : BaseActivityContract.BaseActions> :
-    AppCompatActivity(),
-    BaseActivityContract.BaseViews {
+abstract class BaseActivity<T : BaseActions> : AppCompatActivity(), BaseViews {
 
     protected val TAG = this.javaClass.simpleName
 

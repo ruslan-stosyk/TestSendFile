@@ -10,7 +10,6 @@ import android.util.Log
  * Time: 00:58
  */
 
-@Suppress("UNCHECKED_CAST")
 abstract class BaseActivityPresenter<V : BaseActivityContract.BaseViews>(context: Context) : BaseActivityContract.BaseActions {
     protected val TAG = this.javaClass.simpleName
 

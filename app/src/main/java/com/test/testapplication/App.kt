@@ -3,10 +3,13 @@ package com.test.testapplication
 import android.app.Application
 import com.test.testapplication.di.component.AppComponent
 import com.test.testapplication.di.component.DaggerAppComponent
-import com.test.testapplication.di.component.UploadFileActivityComponent
+import com.test.testapplication.di.component.SplashActivityComponent
+import com.test.testapplication.di.component.SunActivityComponent
+
 import com.test.testapplication.di.module.AppModule
 import com.test.testapplication.di.module.NetModule
-import com.test.testapplication.di.module.UploadFileActivityModule
+import com.test.testapplication.di.module.SplashActivityModule
+import com.test.testapplication.di.module.SunActivityModule
 
 
 /**
@@ -18,7 +21,8 @@ import com.test.testapplication.di.module.UploadFileActivityModule
 class App : Application() {
 
     val BASE_URL = "http://localhost:3333"
-    private var mUploadFileActivityComponent: UploadFileActivityComponent? = null
+    private var mSplashActivityComponent: SplashActivityComponent? = null
+    private var mSunActivityComponent: SunActivityComponent? = null
 
     private val mAppComponent: AppComponent by lazy {
         DaggerAppComponent
@@ -28,19 +32,25 @@ class App : Application() {
             .build()
     }
 
-    override fun onCreate() {
-        super.onCreate()
-        mAppComponent.inject(this)
+    fun getSplashActivityComponent():SplashActivityComponent {
+        if (mSplashActivityComponent == null) {
+            mSplashActivityComponent = mAppComponent.addSplashActivityComponent(SplashActivityModule())
+        }
+        return mSplashActivityComponent!!
     }
 
-    fun getUploadFileComponent(): UploadFileActivityComponent {
-        if (mUploadFileActivityComponent == null) {
-            mUploadFileActivityComponent = mAppComponent.uploadFileActivityComponent(UploadFileActivityModule())
+    fun getSunActivityComponent(): SunActivityComponent {
+        if (mSunActivityComponent == null) {
+            mSunActivityComponent = mAppComponent.addSunActivityComponent(SunActivityModule())
         }
-        return mUploadFileActivityComponent!!
+        return mSunActivityComponent!!
     }
 
     fun releaseSplashActivityComponent() {
-        mUploadFileActivityComponent = null
+        mSplashActivityComponent = null
+    }
+
+    fun releaseSunActivityComponent() {
+        mSunActivityComponent = null
     }
 }

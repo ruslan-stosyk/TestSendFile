@@ -1,9 +1,11 @@
-package com.test.testapplication.data.service.api
+package com.test.testapplication.data.service
 
 import io.reactivex.Flowable
 import okhttp3.MultipartBody
-import okhttp3.ResponseBody
-import retrofit2.http.*
+import retrofit2.http.Field
+import retrofit2.http.Multipart
+import retrofit2.http.POST
+import retrofit2.http.Part
 
 
 /**
@@ -12,15 +14,13 @@ import retrofit2.http.*
  * Time: 1:25
  */
 
-interface FileApiService {
+interface RestApiService {
 
-    companion object {
-        const val FILE_UPLOAD = "/upload"
-    }
+
 
     @Multipart
-    @POST(FILE_UPLOAD)
-    fun uploadPywareFile(
+    @POST("/dummy")
+    fun dymmy(
         @Field("checksum") type: String,
         @Part files: List<MultipartBody.Part>
     ): Flowable<Any>

@@ -15,13 +15,12 @@ import android.widget.Toast
 import com.test.testapplication.App
 import com.test.testapplication.R
 import com.test.testapplication.base.BaseActivity
-import com.test.testapplication.ui.UploadFileActivityContract.Action
-import com.test.testapplication.ui.UploadFileActivityContract.Views
+import com.test.testapplication.ui.SunActivityContract.*
 import com.test.testapplication.utills.GlideUtils
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 
-class UploadFileActivity : BaseActivity<Action>(), Views {
+class SunActivity : BaseActivity<Actions>(), Views {
 
 
     companion object {
@@ -37,14 +36,14 @@ class UploadFileActivity : BaseActivity<Action>(), Views {
     private var mPhotoUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        (application as App).getUploadFileComponent().inject(this)
+        //(application as App).getSunActivityComponent().inject(this)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_upload_file)
+        setContentView(R.layout.activity_sun)
         initView()
     }
 
     private fun initView() {
-        mPreviewIv = findViewById(R.id.upload_file_activity_preview_iv)
+       /* mPreviewIv = findViewById(R.id.upload_file_activity_preview_iv)
         mSelectImageBtn = findViewById(R.id.upload_file_activity_select_image_btn)
         mSelectImageBtn.setOnClickListener { actions.checkPermissionReadWriteStorage() }
 
@@ -54,7 +53,7 @@ class UploadFileActivity : BaseActivity<Action>(), Views {
             if (uri != null) {
                 actions.uploadAvatar(uri)
             }
-        }
+        }*/
 
         loadImage()
     }
